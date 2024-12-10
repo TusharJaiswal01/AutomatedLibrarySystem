@@ -1,38 +1,103 @@
 import React from 'react';
-import './Footer.css';
+import { FaInstagram, FaTwitter, FaFacebook, FaLinkedin } from 'react-icons/fa';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="footer-container">
-      <div className="footer-content">
-        <div className="footer-left">
-          <h2>VidhyaSthali Library</h2>
+    <footer style={styles.footerContainer}>
+      <div style={styles.footerContent}>
+        <div style={styles.footerLeft}>
+          <h2 style={styles.footerTitle}>LibraryXauto</h2>
           <p>Your gateway to knowledge and education.</p>
-          <p>Visit us at [Address], [City, ZIP Code]</p>
+          <p>Visit us at Acropolis Institute of Technology and Research, Indore, 452010</p>
         </div>
 
-        <div className="footer-center">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#books">Books</a></li>
-            <li><a href="#contact">Contact Us</a></li>
+        <div style={styles.footerCenter}>
+          <h3 style={styles.footerSubtitle}>Quick Links</h3>
+          <ul style={styles.quickLinksList}>
+            <li><a href="#home" style={styles.link}>Home</a></li>
+            <li><a href="#about" style={styles.link}>About Us</a></li>
+            <Link to='/books'>
+            <li><a href="#books" style={styles.link}>Books</a></li>
+            </Link>
+            <li><a href="#contact" style={styles.link}>Contact Us</a></li>
           </ul>
         </div>
 
-        <div className="footer-right">
-          <h3>Follow Us</h3>
-          <div className="social-icons">
-            <a href="https://www.instagram.com"><i className="fab fa-instagram"></i></a>
-            <a href="https://www.twitter.com"><i className="fab fa-twitter"></i></a>
-            <a href="https://www.facebook.com"><i className="fab fa-facebook"></i></a>
-            <a href="https://www.linkedin.com"><i className="fab fa-linkedin"></i></a>
+        <div style={styles.footerRight}>
+          <h3 style={styles.footerSubtitle}>Follow Us</h3>
+          <div style={styles.socialIcons}>
+            <a href="https://www.instagram.com" style={styles.socialLink}><FaInstagram size={24} color="#e4405f" /></a>
+            <a href="https://www.twitter.com" style={styles.socialLink}><FaTwitter size={24} color="#1da1f2" /></a>
+            <a href="https://www.facebook.com" style={styles.socialLink}><FaFacebook size={24} color="#1877f2" /></a>
+            <a href="https://www.linkedin.com" style={styles.socialLink}><FaLinkedin size={24} color="#0077b5" /></a>
           </div>
         </div>
       </div>
     </footer>
   );
+};
+
+const styles = {
+  footerContainer: {
+    backgroundColor: '#2c3e50',
+    color: '#fff',
+    padding: '40px 20px',
+    textAlign: 'center',
+  },
+  footerContent: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: '30px',
+  },
+  footerLeft: {
+    flex: 1,
+    minWidth: '250px',
+  },
+  footerTitle: {
+    fontSize: '1.8rem',
+    marginBottom: '10px',
+    color: '#ecf0f1',
+  },
+  footerCenter: {
+    flex: 1,
+    minWidth: '250px',
+  },
+  footerSubtitle: {
+    fontSize: '1.5rem',
+    marginBottom: '10px',
+    color: '#ecf0f1',
+  },
+  quickLinksList: {
+    listStyleType: 'none',
+    padding: '0',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#ecf0f1',
+    fontSize: '1rem',
+    display: 'block',
+    marginBottom: '10px',
+    transition: 'color 0.3s',
+  },
+  linkHover: {
+    color: '#3498db',
+  },
+  footerRight: {
+    flex: 1,
+    minWidth: '250px',
+  },
+  socialIcons: {
+    display: 'flex',
+    gap: '20px',
+    justifyContent: 'center',
+    marginTop: '15px',
+  },
+  socialLink: {
+    color: 'inherit',
+    textDecoration: 'none',
+  },
 };
 
 export default Footer;

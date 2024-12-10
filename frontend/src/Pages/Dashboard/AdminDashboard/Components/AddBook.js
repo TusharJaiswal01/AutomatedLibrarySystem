@@ -24,6 +24,15 @@ function AddBook() {
     const [department, setDepartment] = useState("");
     const [allCategories, setAllCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+    
+    const bookCategoryTypes = [
+        { value: 'Core', text: 'Core' },
+        { value: 'Elective', text: 'Elective' },
+        { value: 'Fiction', text: 'Fiction' },
+
+
+    ];
+
 
     useEffect(() => {
         let isMounted = true;
@@ -145,12 +154,13 @@ function AddBook() {
                         search
                         selection
                         options={allCategories}
+                        // options={bookCategoryTypes}
                         value={selectedCategories}
                         onChange={(event, value) => setSelectedCategories(value.value)}
                     />
                 </div>
 
-                <button className="addbook-form-button" type="submit" disabled={isLoading}>
+                <button className="addbook-button" type="submit" disabled={isLoading}>
                     {isLoading ? "Adding..." : "Add Book"}
                 </button>
             </form>

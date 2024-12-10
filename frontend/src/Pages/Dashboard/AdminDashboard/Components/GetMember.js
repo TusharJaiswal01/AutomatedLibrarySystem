@@ -101,7 +101,7 @@ function GetMember() {
                                 </p>
                                 <p style={{ display: "flex", flex: "0.5", flexDirection: "column" }}>
                                     <span style={{ fontSize: "18px" }}>
-                                        <b>Address</b>
+                                        <b>Department</b>
                                     </span>
                                     <span style={{ fontSize: "16px" }}>
                                         {memberDetails?.address}

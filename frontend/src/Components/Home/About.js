@@ -8,37 +8,37 @@ const About = () => {
         <h1 style={styles.title}>About Us</h1>
         <div style={styles.content}>
           <div style={styles.leftColumn}>
-            <h2 style={styles.subtitle}>Welcome to VidhyaSthali Library</h2>
+            <h2 style={styles.subtitle}>Welcome to LibraryXauto</h2>
             <p style={styles.paragraph}>
-              At VidhyaSthali Library, we are dedicated to fostering a love for reading and lifelong learning. Established in [Year], our library serves as a vital resource for the community, offering a wide range of books, digital resources, and programs designed to inspire and educate.
+              At LibraryXauto, we aim to simplify and enhance your library experience through automation. Whether you're looking for books, notes from experts, or need an extension for your book return, we have you covered. Our platform is designed to make the process seamless and efficient for everyone.
             </p>
             
             <h3 style={styles.subheading}>Our Mission</h3>
             <p style={styles.paragraph}>
-              Our mission is to provide equitable access to information and resources, promoting literacy and learning for all. We strive to create a welcoming environment where everyone feels valued and inspired to explore new ideas.
+              Our mission is to bring innovation to library management. We strive to offer a platform that not only manages books and resources but also supports your educational journey by providing essential services like emergency book extensions, request queues, and easy data uploads.
             </p>
 
             <h3 style={styles.subheading}>Visit Us</h3>
             <p style={styles.paragraph}>
-              We invite you to explore our library! Located at [Address], our doors are open to everyone. Join us for events, discover new books, or find a cozy corner to read. We look forward to welcoming you to VidhyaSthali Library!
+              Explore the world of learning with LibraryXauto. Our online platform is accessible anytime, anywhere. Join us and enjoy features like automatic notifications for book returns, an easy way to request unavailable books, and a comprehensive catalog for students and staff alike.
             </p>
           </div>
 
           <div style={styles.rightColumn}>
             <h3 style={styles.subheading}>Our Values</h3>
             <ul style={styles.list}>
-              <li style={styles.listItem}><FaUsers style={styles.icon} /> **Inclusivity:** We embrace diversity and welcome everyone.</li>
-              <li style={styles.listItem}><FaHandshake style={styles.icon} /> **Integrity:** We uphold the highest standards of ethics and professionalism.</li>
-              <li style={styles.listItem}><FaLightbulb style={styles.icon} /> **Innovation:** We continuously evolve to meet the needs of our community.</li>
-              <li style={styles.listItem}><FaRegCalendarAlt style={styles.icon} /> **Community:** We engage with and serve our community actively.</li>
+              <li style={styles.listItem}><FaUsers style={styles.icon} /> Inclusivity: We believe in making library resources available to all users equally.</li>
+              <li style={styles.listItem}><FaHandshake style={styles.icon} /> Integrity: We are committed to providing transparent and reliable services.</li>
+              <li style={styles.listItem}><FaLightbulb style={styles.icon} /> Innovation: We use automation and technology to improve your library experience.</li>
+              <li style={styles.listItem}><FaRegCalendarAlt style={styles.icon} /> Community: We actively serve and engage with our library community.</li>
             </ul>
 
-            <h3 style={styles.subheading}>Our Services</h3>
+            <h3 style={styles.subheading}>Our Specialties</h3>
             <ul style={styles.list}>
-              <li style={styles.listItem}><FaBook style={styles.icon} /> **Diverse Collection:** Access to thousands of books and digital resources.</li>
-              <li style={styles.listItem}><FaLightbulb style={styles.icon} /> **Research Assistance:** Help with information literacy and research.</li>
-              <li style={styles.listItem}><FaRegCalendarAlt style={styles.icon} /> **Events and Workshops:** Engage in community events for all ages.</li>
-              <li style={styles.listItem}><FaMapMarkerAlt style={styles.icon} /> **Study Spaces:** Quiet areas for individual and group study.</li>
+              <li style={styles.listItem}><FaBook style={styles.icon} /> Automated Book Management: Easy access to books and resources with real-time availability tracking.</li>
+              <li style={styles.listItem}><FaLightbulb style={styles.icon} /> Notes Section: Access to curated notes and educational resources from previous readers.</li>
+              <li style={styles.listItem}><FaRegCalendarAlt style={styles.icon} />Advanced Dashboard : Our advanced dashboard allows students to effortlessly track their issued books and complete borrowing history in one place.</li>
+              <li style={styles.listItem}><FaMapMarkerAlt style={styles.icon} /> Pre Issue Books: Automatically join a queue for unavailable books and get notified when available.</li>
             </ul>
           </div>
         </div>

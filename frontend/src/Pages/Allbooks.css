@@ -18,7 +18,10 @@
     flex-direction: column;
     box-sizing: content-box;
     height: auto;
-    width: 250px;
+    min-height: 400px;
+    /* changed width from 250px */
+    width: 400px;  
+
     align-items: center;
     padding: 25px;
     margin: 10px;

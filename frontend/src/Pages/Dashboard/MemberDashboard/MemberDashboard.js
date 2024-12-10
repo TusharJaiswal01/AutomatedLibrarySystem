@@ -14,6 +14,13 @@ import { IconButton } from "@material-ui/core";
 import { AuthContext } from "../../../Context/AuthContext";
 import axios from "axios";
 import moment from "moment";
+import ModelComponent from "./Modal";
+
+
+
+
+
+
 
 function MemberDashboard() {
   const [active, setActive] = useState("profile");
@@ -22,6 +29,16 @@ function MemberDashboard() {
   const API_URL = process.env.REACT_APP_API_URL;
   const { user } = useContext(AuthContext);
   const [memberDetails, setMemberDetails] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     const getMemberDetails = async () => {
@@ -41,9 +58,12 @@ function MemberDashboard() {
     localStorage.removeItem("user");
     window.location.reload();
   };
-  const handleClick = () => {
-    window.location.href = 'https://payment-green-five.vercel.app/'; 
-};
+  //   const handleClick = () => {
+  //     window.location.href = 'https://payment-green-five.vercel.app/'; 
+  // };
+
+
+
   return (
     <div className="dashboard">
       <div className="dashboard-card">
@@ -63,13 +83,12 @@ function MemberDashboard() {
         >
           <div className="dashboard-logo">
             {/* <LibraryBooksIcon style={{ fontSize: 50 }} /> */}
-            <p className="logo-name">VidhyaSthali</p>
+            <p className="logo-name"></p>
           </div>
           <a
             href="#profile@member"
-            className={`dashboard-option ${
-              active === "profile" ? "clicked" : ""
-            }`}
+            className={`dashboard-option ${active === "profile" ? "clicked" : ""
+              }`}
             onClick={() => {
               setActive("profile");
               setSidebar(false);
@@ -79,21 +98,19 @@ function MemberDashboard() {
           </a>
           <a
             href="#activebooks@member"
-            className={`dashboard-option ${
-              active === "active" ? "clicked" : ""
-            }`}
+            className={`dashboard-option ${active === "active" ? "clicked" : ""
+              }`}
             onClick={() => {
               setActive("active");
               setSidebar(false);
             }}
           >
-            <LocalLibraryIcon className="dashboard-option-icon" /> Active
+            <LocalLibraryIcon className="dashboard-option-icon" /> Issued Books
           </a>
           <a
             href="#reservedbook@member"
-            className={`dashboard-option ${
-              active === "reserved" ? "clicked" : ""
-            }`}
+            className={`dashboard-option ${active === "reserved" ? "clicked" : ""
+              }`}
             onClick={() => {
               setActive("reserved");
               setSidebar(false);
@@ -103,9 +120,8 @@ function MemberDashboard() {
           </a>
           <a
             href="#history@member"
-            className={`dashboard-option ${
-              active === "history" ? "clicked" : ""
-            }`}
+            className={`dashboard-option ${active === "history" ? "clicked" : ""
+              }`}
             onClick={() => {
               setActive("history");
               setSidebar(false);
@@ -115,9 +131,8 @@ function MemberDashboard() {
           </a>
           <a
             href="#profile@member"
-            className={`dashboard-option ${
-              active === "logout" ? "clicked" : ""
-            }`}
+            className={`dashboard-option ${active === "logout" ? "clicked" : ""
+              }`}
             onClick={() => {
               logout();
               setSidebar(false);
@@ -177,19 +192,28 @@ function MemberDashboard() {
                   </p>
                   <p className="specific-left-topic">
                     <span style={{ fontSize: "18px" }}>
-                      <b>Address</b>
+                      <b>Department</b>
                     </span>
                     <span style={{ fontSize: "16px" }}>
                       {memberDetails?.address}
                     </span>
-                    
+
                   </p>
                 </div>
               </div>
-              <div style={{marginLeft:"150px" , marginTop:"150px"}}> <button style={{height:"35px"}} onClick={handleClick} > check Your Fine Status</button></div> 
+
+              
+
+              {/* <Modal show={modalShow} onHide={() => setModalShow(false)}  /> */}
             </div>
+            <div style={{ marginLeft: "", marginTop: "30px" }}> 
+                <button className="text-white text-2xl" style={{ backgroundColor: "red", borderRadius: "20px", padding: "20px", fontWeight: "bolder" }} onClick={() => setModalShow(true)}  >
+                   Check Your Fine Status
+
+                </button>
+              </div>
           </div>
-           
+
           <div className="member-activebooks-content" id="activebooks@member">
             <p className="member-dashboard-heading">Issued</p>
             <table className="activebooks-table">
@@ -215,16 +239,16 @@ function MemberDashboard() {
                         {Math.floor(
                           (Date.parse(moment(new Date()).format("MM/DD/YYYY")) -
                             Date.parse(data.toDate)) /
-                            86400000
+                          86400000
                         ) <= 0
                           ? 0
                           : Math.floor(
-                              (Date.parse(
-                                moment(new Date()).format("MM/DD/YYYY")
-                              ) -
-                                Date.parse(data.toDate)) /
-                                86400000
-                            ) * 10}
+                            (Date.parse(
+                              moment(new Date()).format("MM/DD/YYYY")
+                            ) -
+                              Date.parse(data.toDate)) /
+                            86400000
+                          ) * 10}
                       </td>
                     </tr>
                   );
@@ -260,6 +284,7 @@ function MemberDashboard() {
                 })}
             </table>
           </div>
+
           <div className="member-history-content" id="history@member">
             <p className="member-dashboard-heading">History</p>
             <table className="activebooks-table">
@@ -285,6 +310,8 @@ function MemberDashboard() {
           </div>
         </div>
       </div>
+      <ModelComponent show={modalShow}
+        onHide={() => setModalShow(false)} />
     </div>
   );
 }

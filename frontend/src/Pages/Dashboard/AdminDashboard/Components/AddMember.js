@@ -34,6 +34,17 @@ function AddMember() {
         { value: 'Student', text: 'Student' }
     ];
 
+    const departmentTypes = [
+        { value: "CSE", text: "CSE" },
+        { value: "CSIT", text: "CSIT" },
+        { value: "AIML", text: "AIML" },
+        { value: "IT", text: "IT" },
+        { value: "CY", text: "CY" },
+        { value: "DS", text: "DS" },
+        { value: "RL", text: "RL" },
+        { value: "IOT", text: "IOT" },
+    ]
+
     // Add a Member
     const addMember = async (e) => {
         e.preventDefault();
@@ -144,8 +155,19 @@ function AddMember() {
                     dateFormat="MM/dd/yyyy"
                 />
 
-                <label className="addmember-form-label" htmlFor="address">Address<span className="required-field">*</span></label><br />
-                <input className="addmember-form-input address-field" value={address} type="text" required onChange={(e) => setAddress(e.target.value)}></input><br />
+                {/* <label className="addmember-form-label" htmlFor="address">Department<span className="required-field">*</span></label><br />
+                <input className="addmember-form-input address-field" value={address} type="text" required onChange={(e) => setAddress(e.target.value)}></input><br /> */}
+                  
+                <label className="addmember-form-label" htmlFor="address">Department<span className="required-field">*</span></label><br />
+                <div className='semanticdropdown'>
+                    <Dropdown
+                        placeholder='Department Type'
+                        fluid
+                        selection
+                        options={departmentTypes}
+                        onChange={(event, data) => setAddress(data.value)}
+                    />
+                </div>
 
                 <label className="addmember-form-label" htmlFor="email">Email<span className="required-field">*</span></label><br />
                 <input className="addmember-form-input" type="email" value={email} required onChange={(e) => setEmail(e.target.value)}></input><br />
@@ -156,7 +178,7 @@ function AddMember() {
                 {/* File Upload Field */}
                 <label className="addmember-form-label" htmlFor="file">Upload File</label><br />
                 <input className="addmember-form-input" type="file" accept=".jpg,.jpeg,.png,.pdf" onChange={(e) => setFile(e.target.files[0])} /><br />
-                <button onClick={()=> {alert("data uploaded to db")}}>Upload data</button>
+                <button onClick={() => { alert("data uploaded to db") }}>Upload data</button>
 
                 <input className="addmember-submit" type="submit" value="SUBMIT" disabled={isLoading}></input>
             </form>

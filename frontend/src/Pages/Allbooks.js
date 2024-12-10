@@ -5,12 +5,18 @@ function Allbooks() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedField, setSelectedField] = useState("all");
   const [selectedBook, setSelectedBook] = useState(null);
+  const [autocompleteOptions, setAutocompleteOptions] = useState([]);
+  const [semesterOptions, setSemesterOptions] = useState([]);
 
   // Fetch books from backend API
   useEffect(() => {
     fetch("http://localhost:5000/api/books/allbooks")
       .then((response) => response.json())
-      .then((data) => setBooks(data))
+      .then((data) => {
+        setBooks(data);
+        const uniqueSemesters = [...new Set(data.map(book => book.semester))];
+        setSemesterOptions(uniqueSemesters);
+      })
       .catch((error) => console.log("Error fetching books:", error));
   }, []);
 
@@ -60,6 +66,31 @@ function Allbooks() {
 
   const handleFilterChange = (e) => {
     setSelectedField(e.target.value);
+    setSearchTerm("");
+    setAutocompleteOptions([]);
+  };
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (value && selectedField !== "semester") {
+      const filteredSuggestions = books
+        .filter(book => {
+          const fieldValue = book[selectedField]?.toString().toLowerCase();
+          return fieldValue && fieldValue.includes(value.toLowerCase());
+        })
+        .map(book => book[selectedField]);
+
+      setAutocompleteOptions([...new Set(filteredSuggestions)]);
+    } else {
+      setAutocompleteOptions([]);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchTerm(suggestion);
+    setAutocompleteOptions([]);
   };
 
   const filteredBooks = books.filter((book) => {
@@ -74,7 +105,7 @@ function Allbooks() {
       case "subjectCode":
         return book.subjectCode && book.subjectCode.toLowerCase().includes(searchLower);
       case "semester":
-        return book.semester && book.semester.toString().toLowerCase().includes(searchLower);
+        return book.semester && book.semester.toString().toLowerCase() === searchLower;
       case "department":
         return book.department && book.department.toLowerCase().includes(searchLower);
       case "language":
@@ -88,7 +119,6 @@ function Allbooks() {
           (book.subjectCode && book.subjectCode.toLowerCase().includes(searchLower)) ||
           (book.semester && book.semester.toString().toLowerCase().includes(searchLower)) ||
           (book.department && book.department.toLowerCase().includes(searchLower)) ||
-          (book.edition && book.edition.toString().toLowerCase().includes(searchLower)) ||
           (book.language && book.language.toLowerCase().includes(searchLower)) ||
           (book.publisher && book.publisher.toLowerCase().includes(searchLower))
         );
@@ -103,8 +133,9 @@ function Allbooks() {
           type="text"
           placeholder="Search books..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleSearchChange}
           style={styles.searchBar}
+          disabled={selectedField === "semester"}
         />
 
         {/* Dropdown for selecting search field */}
@@ -122,7 +153,38 @@ function Allbooks() {
           <option value="language">Language</option>
           <option value="publisher">Publisher</option>
         </select>
+
+        {/* Semester Dropdown */}
+        {selectedField === "semester" && (
+          <select
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={styles.semesterDropdown}
+          >
+            <option value="">Select Semester</option>
+            {semesterOptions.map((semester) => (
+              <option key={semester} value={semester}>
+                {semester}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
+
+      {/* Autocomplete Suggestions */}
+      {autocompleteOptions.length > 0 && (
+        <div style={styles.autocompleteContainer}>
+          {autocompleteOptions.map((option, index) => (
+            <div
+              key={index}
+              onClick={() => handleSuggestionClick(option)}
+              style={styles.autocompleteOption}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div style={styles.booksContainer}>
         {filteredBooks.map((book) => (
@@ -200,101 +262,120 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     padding: "20px",
-    background: "linear-gradient(to right, #e0eafc, #cfdef3)", // Gradient background
+    background: "linear-gradient(to right, #e0eafc, #cfdef3)",
     minHeight: "100vh",
   },
   searchRow: {
+    
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "20px",
-    marginTop:"100px"
+    gap: "10px",
   },
   searchBar: {
+    marginTop:"80px",
     padding: "10px",
-    width: "60%", // Smaller width for search bar
-    marginRight: "10px", // Add margin to separate from dropdown
-    fontSize: "16px",
-    borderRadius: "8px",
-    border: "1px solid #ddd",
-    boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    width: "500px",
   },
   filterDropdown: {
+    marginTop:"80px",
     padding: "10px",
-    fontSize: "16px",
-    borderRadius: "8px",
-    border: "1px solid #ddd",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+  },
+  semesterDropdown: {
+    marginTop:"80px",
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+  },
+  autocompleteContainer: {
+    // marginTop:"80px",
+    position: "absolute",
+    width: "300px",
+    backgroundColor: "#fff",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+    borderRadius: "4px",
+    maxHeight: "150px",
+    overflowY: "auto",
+    marginTop: "80px",
+  },
+  autocompleteOption: {
+    
+    padding: "10px",
     cursor: "pointer",
   },
   booksContainer: {
+    width:"100%",
+    marginTop:"50px",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-    gap: "25px",
-    maxWidth: "1200px",
-    width: "100%",
+    
+
+    gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+    gap: "20px",
   },
   bookCard: {
-    backgroundColor: "#fff",
-    padding: "18px",
-    borderRadius: "12px",
-    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1)",
-    textAlign: "center",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    background: "#fff",
+    borderRadius: "8px",
+    padding: "15px",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
     cursor: "pointer",
-    overflow: "hidden",
+    transition: "transform 0.2s",
+    minHeight : "130px",
+  },
+  bookCardHover: {
+    transform: "scale(1.05)",
   },
   bookTitle: {
-    fontSize: "20px",
     fontWeight: "bold",
-    color: "#333",
+    fontSize: "1.1em",
     marginBottom: "10px",
   },
   label: {
     fontWeight: "bold",
-    fontSize: "14px",
-    color: "#555",
-  },
-  issueButton: {
-    backgroundColor: "#4CAF50",
-    color: "white",
-    border: "none",
-    padding: "10px 20px",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontSize: "16px",
-    marginTop: "10px",
-  },
-  closeButton: {
-    backgroundColor: "#f44336",
-    color: "white",
-    border: "none",
-    padding: "10px 20px",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontSize: "16px",
-    marginTop: "10px",
   },
   modalOverlay: {
     position: "fixed",
-    top: 0,
-    left: 0,
+    top: "0",
+    left: "0",
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   modalContent: {
-    backgroundColor: "white",
+    background: "#fff",
+    borderRadius: "8px",
     padding: "20px",
-    borderRadius: "12px",
-    width: "400px",
-    textAlign: "center",
+    width: "500px",
+    maxHeight: "90vh",
+    overflowY: "auto",
   },
   modalTitle: {
-    fontSize: "24px",
-    marginBottom: "20px",
+    fontSize: "1.5em",
+    marginBottom: "10px",
+  },
+  issueButton: {
+    padding: "10px 20px",
+    backgroundColor: "#28a745",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+  },
+  closeButton: {
+    padding: "10px 20px",
+    backgroundColor: "#dc3545",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    marginLeft: "10px",
   },
 };
 

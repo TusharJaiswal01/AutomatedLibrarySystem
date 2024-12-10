@@ -1,8 +1,7 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 dotenv.config();
-
-const sendEmail = async (to) => {
+const sendEmail = async (to, message) => {
   try {
     let transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -15,15 +14,12 @@ const sendEmail = async (to) => {
     let mailOptions = {
       from: process.env.EMAIL_USER,
       to: to,
-      subject: "Information for Fine",
-      text: "Hello dear , This is information mail From Vidhyasthali",
+      subject: "Account Created - LibraryXauto",
+      text: message,
     };
 
     const res = await transporter.sendMail(mailOptions);
-
-    console.log({ res });
-    console.log('Email sent successfully', to);
-    
+    console.log('Email sent successfully', to, res);
     return { success: true, message: 'Email sent successfully!' };
   } catch (error) {
     console.error('Error sending email:', error);
@@ -31,4 +27,5 @@ const sendEmail = async (to) => {
   }
 };
 
-export default sendEmail;  
+export default sendEmail;
+

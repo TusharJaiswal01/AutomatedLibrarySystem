@@ -1,17 +1,17 @@
 .dashboard {
-  display: grid;
+  /* display: grid; */
   place-items: center;
   height: 100%;
 
   background-color: #1F2937;
-  position: relative;
+  position: absolute;
   
 }
 
 .dashboard-card {
   font-family: sans-serif;
-  width: 80vw;
-  height: 90vh;
+  width: 100vw;
+  height: 96vh;
   margin: 60px auto;
   display: flex;
   background-color: #fefaf5;
@@ -29,7 +29,7 @@
   color: wheat;
   display: flex;
   flex-direction: column;
-  flex: 0.25;
+  flex: 0.20;
   width: 40vw;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -194,8 +194,9 @@
   font-size: 18px;
 }
 
-.addbook-submit,
+.addbook-button,
 .addmember-submit,
+
 .transaction-form-submit {
   padding: 8px 10px;
   border: 2px solid wheat;
@@ -294,4 +295,11 @@
 
 .returnbook-dropdown {
   margin: 25px 0px 25px 30px !important;
+}
+
+
+.addbook-form-button{
+  margin-top: 15px;
+  background-color: magenta;
+  
 }

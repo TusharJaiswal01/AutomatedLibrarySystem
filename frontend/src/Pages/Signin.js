@@ -49,9 +49,13 @@ function Signin() {
                     <div className="error-message"><p>{error}</p></div>
                     <div className="signin-fields">
                         <label htmlFor={isStudent?"admissionId":"employeeId"}> <b>{isStudent?"Admission ID":"Employee ID"}</b></label>
+
                         <input className='signin-textbox' type="text" placeholder={isStudent?"Enter Admission ID":"Enter Employee ID"} name={isStudent?"admissionId":"employeeId"} required onChange={(e) => { isStudent?setAdmissionId(e.target.value):setEmployeeId(e.target.value) }}/>
+
                         <label htmlFor="password"><b>Password</b></label>
+
                         <input className='signin-textbox' type="password" minLength='6' placeholder="Enter Password" name="psw" required onChange={(e) => { setPassword(e.target.value) }} />
+                        
                         </div>
                     <button className="signin-button">Log In</button>
                     <a className="forget-pass" href="#home">Forgot password?</a>

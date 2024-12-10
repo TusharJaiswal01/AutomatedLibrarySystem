@@ -11,6 +11,7 @@ import About from "./Components/Home/About.js";
 import Home from "./Components/Home/Home.js";
 import ContactUs from "./Components/Home/ContactUs.js";
 import Footer from "./Components/Home/Footer.js";
+import NotesSection from "./Pages/NotesSection.js";
 
 function App() {
   // Check if the user is logged in by getting user data from localStorage
@@ -52,7 +53,9 @@ function App() {
           <Route exact path='/books'>
             {user && !user.isAdmin ? <Allbooks /> : <Redirect to='/' />} {/* Redirect to homepage if user is admin */}
           </Route>
-          
+          <Route exact path='/NotesSection'>
+            {user && !user.isAdmin ? <NotesSection /> : <Redirect to='/' />} {/* Redirect to homepage if user is admin */}
+          </Route>
         </Switch>
       </div>
     </Router>

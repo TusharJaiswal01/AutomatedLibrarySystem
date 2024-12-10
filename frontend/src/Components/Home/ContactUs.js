@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import './ContactUs.css';
 
 const ContactUs = () => {
@@ -12,16 +13,16 @@ const ContactUs = () => {
 
         <div className="contact-info-form">
           <div className="contact-info">
-            <h2>📍 Visit Us</h2>
-            <p>VidhyaSthali Library,</p>
+            <h2><FaMapMarkerAlt /> Visit Us</h2>
+            <p>LibraryXauto,</p>
             <p>[Address]</p>
             <p>[City, ZIP Code]</p>
 
-            <h2>📞 Call Us</h2>
+            <h2><FaPhoneAlt /> Call Us</h2>
             <p>Phone: +91 123-456-7890</p>
 
-            <h2>📧 Email Us</h2>
-            <p>Email: contact@vidhyasthali.com</p>
+            <h2><FaEnvelope /> Email Us</h2>
+            <p>Email: contact@libraryXauto.com</p>
           </div>
 
           <div className="contact-form">
