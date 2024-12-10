@@ -1,45 +1,70 @@
 import mongoose from "mongoose";
 
 const BookSchema = new mongoose.Schema({
-    bookName:{
-        type:String,
-        require:true
+    bookName: {
+        type: String,
+        required: true
     },
-    alternateTitle:{
-        type:String,
-        default:""
+    availableCount: {
+        type: Number,
+        required: true,
+        default: 5
     },
-    author:{
-        type:String,
-        require:true
+    alternateTitle: {
+        type: String,
+        default: ""
     },
-    language:{
-        type:String,
-        default:""
+    author: {
+        type: String,
+        required: true
     },
-    publisher:{
-        type:String,
-        default:""
+    language: {
+        type: String,
+        default: ""
     },
-    bookCountAvailable:{
-        type:Number,
-        require:true
+    publisher: {
+        type: String,
+        default: ""
     },
-    bookStatus:{
-        type:String,
-        default:"Available"
+    
+    bookStatus: {
+        type: String,
+        default: "Available"
     },
-    categories:[{ 
-        type: mongoose.Types.ObjectId, 
-        ref: "BookCategory" 
+    ISBN: {
+        type: String,
+        required: true  // ISBN number should be required for uniqueness
+    },
+    subjectCode: {
+        type: String,
+        default: ""  // Can be specific to the subject of the book
+    },
+    edition: {
+        type: String,
+        default: ""
+    },
+    publication: {
+        type: String,
+        default: ""
+    },
+    semester: {
+        type: Number, // Assuming semester is a number
+        default: null
+    },
+    department: {
+        type: String,
+        default: ""  // Department can be linked to a particular field of study
+    },
+    categories: [{
+        type: mongoose.Types.ObjectId,
+        ref: "BookCategory"
     }],
-    transactions:[{
-        type:mongoose.Types.ObjectId,
-        ref:"BookTransaction"
+    transactions: [{
+        type: mongoose.Types.ObjectId,
+        ref: "BookTransaction"
     }]
-},
-{
-    timestamps:true
-})
+}, {
+    timestamps: true
+});
 
-export default mongoose.model("Book",BookSchema)
+export default mongoose.model("Book", BookSchema);

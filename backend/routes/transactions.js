@@ -1,6 +1,8 @@
 import express from "express"
 import Book from "../models/Book.js"
 import BookTransaction from "../models/BookTransaction.js"
+import { addToQueue, sendMailToUser } from "./queue.js"
+import Requested from "../models/Requested.js"
 
 const router = express.Router()
 
@@ -16,6 +18,11 @@ router.post("/add-transaction", async (req, res) => {
                 fromDate: req.body.fromDate,
                 toDate: req.body.toDate
             })
+
+            if (req.body.transactionType == "Reserved") {
+                await addToQueue(req.body.borrowerId, req.body.bookId)
+            }
+
             const transaction = await newtransaction.save()
             const book = Book.findById(req.body.bookId)
             await book.updateOne({ $push: { transactions: transaction._id } })
@@ -46,6 +53,16 @@ router.put("/update-transaction/:id", async (req, res) => {
             await BookTransaction.findByIdAndUpdate(req.params.id, {
                 $set: req.body,
             });
+
+            const mailRes = await sendMailToUser(req.body.bookId)
+
+            if(mailRes){
+                const newRequest = await Requested.create({
+                    userId:mailRes.userId,
+                    bookId:req.body.bookId,
+                });
+            }
+
             res.status(200).json("Transaction details updated successfully");
         }
     }

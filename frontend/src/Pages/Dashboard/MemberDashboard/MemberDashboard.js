@@ -41,7 +41,9 @@ function MemberDashboard() {
     localStorage.removeItem("user");
     window.location.reload();
   };
-
+  const handleClick = () => {
+    window.location.href = 'https://payment-green-five.vercel.app/'; 
+};
   return (
     <div className="dashboard">
       <div className="dashboard-card">
@@ -60,8 +62,8 @@ function MemberDashboard() {
           className={sidebar ? "dashboard-options active" : "dashboard-options"}
         >
           <div className="dashboard-logo">
-            <LibraryBooksIcon style={{ fontSize: 50 }} />
-            <p className="logo-name">LCMS</p>
+            {/* <LibraryBooksIcon style={{ fontSize: 50 }} /> */}
+            <p className="logo-name">VidhyaSthali</p>
           </div>
           <a
             href="#profile@member"
@@ -180,49 +182,14 @@ function MemberDashboard() {
                     <span style={{ fontSize: "16px" }}>
                       {memberDetails?.address}
                     </span>
+                    
                   </p>
                 </div>
               </div>
-              <div className="specific-right">
-                <div className="specific-right-top">
-                  <p className="specific-right-topic">
-                    <b>Points</b>
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "25px",
-                      fontWeight: "500",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginTop: "15px",
-                    }}
-                  >
-                    540
-                  </p>
-                </div>
-                <div className="dashboard-title-line"></div>
-                <div className="specific-right-bottom">
-                  <p className="specific-right-topic">
-                    <b>Rank</b>
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "25px",
-                      fontWeight: "500",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginTop: "15px",
-                    }}
-                  >
-                    {memberDetails?.points}
-                  </p>
-                </div>
-              </div>
+              <div style={{marginLeft:"150px" , marginTop:"150px"}}> <button style={{height:"35px"}} onClick={handleClick} > check Your Fine Status</button></div> 
             </div>
           </div>
-
+           
           <div className="member-activebooks-content" id="activebooks@member">
             <p className="member-dashboard-heading">Issued</p>
             <table className="activebooks-table">

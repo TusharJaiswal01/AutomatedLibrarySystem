@@ -42,7 +42,7 @@ function AddTransaction() {
             const book_details = await axios.get(API_URL + "api/books/getbook/" + bookId)
             
             /* Checking weather the book is available or not */
-            if ((book_details.data.bookCountAvailable > 0 && (transactionType === "Issued" || transactionType === "Reserved")) || (book_details.data.bookCountAvailable === 0 && transactionType === "Reserved")) {
+            if ((book_details.data.availableCount > 0 && (transactionType === "Issued" || transactionType === "Reserved")) || (book_details.data.availableCount === 0 && transactionType === "Reserved")) {
                 const transactionData = {
                     bookId: bookId,
                     borrowerId: borrowerId,
@@ -65,7 +65,7 @@ function AddTransaction() {
 
                     await axios.put(API_URL+"api/books/updatebook/"+bookId,{
                         isAdmin:user.isAdmin,
-                        bookCountAvailable:book_details.data.bookCountAvailable - 1
+                        availableCount:book_details.data.availableCount - 1
                     })
 
                     setRecentTransactions([response.data, ...recentTransactions])
@@ -157,9 +157,13 @@ function AddTransaction() {
     }, [API_URL])
 
 
+      async function getAllRequest(){
+        const request =   await axios.get      
+       }
+
     return (
         <div>
-            <p className="dashboard-option-title">Add a Transaction</p>
+            <p className="dashboard-option-title">Issue/Return</p>
             <div className="dashboard-title-line"></div>
             <form className='transaction-form' onSubmit={addTransaction}>
                 <label className="transaction-form-label" htmlFor="borrowerId">Borrower<span className="required-field">*</span></label><br />

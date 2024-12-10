@@ -8,15 +8,16 @@
     width: 100%;
     position: fixed;
     z-index: 100;
-    background-color: rgb(16,25,13);
+    background-color: #1F2937;
     box-shadow: 0 1px 4px rgba(146,161,176,.15);
     top: 0%;
 }
 
 .logo-nav a{
     font-size: 20px;
-    color: rgb(233,83,75);
+    color: white;
     font-weight: 800;
+    display: flex;
 }
 
 .logo-nav a:hover{
@@ -45,8 +46,9 @@
 
 .nav-right{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
+    margin-left: 100px;
 }
   
 .option{
@@ -55,11 +57,11 @@
     align-items: center;
     padding: 0px 40px;
     margin-top: 15px;
-    color: rgb(243, 6, 6);
+    color: white;
 }
 
 .option a{
-    color: rgb(233,83,75);
+    color: white;
     display: flex;
     align-items: center;
     font-weight: 800;
@@ -126,7 +128,7 @@ a{
     .menu-icon{
         width: 45px;
         height: 45px;
-        color: rgb(233,83,75);
+        color: white;
         padding: 2px;
         background-color: rgb(246, 233, 202);
         border-radius: 5px;
