@@ -104,6 +104,7 @@ function Header() {
               </li>
             ) : (
               <>
+              // adding notification of file
                 <li className="option" onClick={() => { closeMenu(); }}>
                   <Link to='/signin'>
                     <a href="#books">Books</a>
