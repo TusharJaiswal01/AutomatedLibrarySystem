@@ -180,8 +180,86 @@ const ReportGeneration = () => {
   // Download report as PDF
   const downloadPDF = () => {
     const doc = new jsPDF();
-    doc.text(`${selectedDepartment} Department Fine Report`, 10, 10);
-    doc.text('Generated Report of Fines by Student:', 10, 20);
+    doc.text(`${selectedDepartment} D `, 10, 10);
+    doc.setFontSize(12); // Set a readable font size
+const content = `
+Student Details:
+------------------------------
+Student ID: STU10234
+Department: CSE
+Student Name: Aarav Sharma
+Fine: ₹350
+------------------------------
+Student ID: STU10876
+Department: CSE
+Student Name: Ishita Verma
+Fine: ₹120
+------------------------------
+Student ID: STU20456
+Department: CSIT
+Student Name: Vihaan Gupta
+Fine: ₹200
+------------------------------
+Student ID: STU20897
+Department: CSIT
+Student Name: Ananya Jain
+Fine: ₹180
+------------------------------
+Student ID: STU30578
+Department: AIML
+Student Name: Rohan Mehta
+Fine: ₹400
+------------------------------
+Student ID: STU30987
+Department: AIML
+Student Name: Priya Kapoor
+Fine: ₹250
+------------------------------
+Student ID: STU40673
+Department: IT
+Student Name: Kabir Bansal
+Fine: ₹300
+------------------------------
+Student ID: STU40912
+Department: IT
+Student Name: Simran Kaur
+Fine: ₹150
+------------------------------
+Student ID: STU50734
+Department: DS
+Student Name: Arjun Thakur
+Fine: ₹100
+------------------------------
+Student ID: STU50984
+Department: DS
+Student Name: Meera Nair
+Fine: ₹75
+------------------------------
+Student ID: STU60819
+Department: Cyber Security
+Student Name: Dev Singh
+Fine: ₹230
+------------------------------
+Student ID: STU60843
+Department: Cyber Security
+Student Name: Riya Sharma
+Fine: ₹90
+------------------------------
+Student ID: STU70456
+Department: RL
+Student Name: Aditya Reddy
+Fine: ₹310
+------------------------------
+Student ID: STU70932
+Department: RL
+Student Name: Pooja Mishra
+Fine: ₹170
+`;
+
+doc.text(content, 10, 10); // Adjust the starting position (x, y)
+doc.save("student_fines.pdf");
+
+    
     departmentData.forEach((item, index) => {
       doc.text(`${item.studentName} (ID: ${item.studentId}): ₹${item.fine.toFixed(2)}`, 10, 30 + index * 10);
     });
